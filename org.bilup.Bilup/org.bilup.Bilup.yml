@@ -1,0 +1,77 @@
+app-id: org.bilup.Bilup
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '25.08'
+command: Bilup
+separate-locales: false
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+  - --talk-name=org.freedesktop.Notifications
+modules:
+  - name: bilup
+    buildsystem: simple
+    build-options:
+      arch:
+        x86_64:
+          env:
+            BILUP_ARCH: x64
+        aarch64:
+          env:
+            BILUP_ARCH: arm64
+        armv7l:
+          env:
+            BILUP_ARCH: armv7l
+    build-commands:
+      - install -d /app/main
+      - tar -xf Bilup-linux-$BILUP_ARCH-1.5.3.tar.gz
+      - cp -a Bilup-linux-$BILUP_ARCH-1.5.3/* /app/main/
+      - install -Dm755 run.sh /app/bin/Bilup
+      - install -Dm644 org.bilup.Bilup.metainfo.xml /app/share/metainfo/org.bilup.Bilup.metainfo.xml
+      - install -Dm644 org.bilup.Bilup.desktop /app/share/applications/org.bilup.Bilup.desktop
+      - install -Dm644 org.bilup.Bilup.mime.xml /app/share/mime/packages/org.bilup.Bilup.mime.xml
+      - install -Dm644 512.png /app/share/icons/hicolor/512x512/apps/org.bilup.Bilup.png
+      - install -Dm644 256.png /app/share/icons/hicolor/256x256/apps/org.bilup.Bilup.png
+      - install -Dm644 128.png /app/share/icons/hicolor/128x128/apps/org.bilup.Bilup.png
+      - install -Dm644 64.png /app/share/icons/hicolor/64x64/apps/org.bilup.Bilup.png
+      - install -Dm644 32.png /app/share/icons/hicolor/32x32/apps/org.bilup.Bilup.png
+      - install -Dm644 16.png /app/share/icons/hicolor/16x16/apps/org.bilup.Bilup.png
+      - install -Dm644 scalable.svg /app/share/icons/hicolor/scalable/apps/org.bilup.Bilup.svg
+    sources:
+      - type: file
+        url: https://github.com/Bilup/desktop/releases/download/v1.5.3/Bilup-linux-x64-1.5.3.tar.gz
+        sha256: 18c5e6dd1ca953498e9f20a2b99bb9d2722b7e0e0cd1f5d0a2df171204c86c6b
+        dest-filename: Bilup-linux-x64-1.5.3.tar.gz
+        only-arches: [x86_64]
+
+      - type: file
+        url: https://github.com/Bilup/desktop/releases/download/v1.5.3/Bilup-linux-arm64-1.5.3.tar.gz
+        sha256: b0c8b5c1df2d4b87a889f6e02b33ec801705c54c4dc99f742db0a5203a26f9c1
+        dest-filename: Bilup-linux-arm64-1.5.3.tar.gz
+        only-arches: [aarch64]
+
+      - type: file
+        url: https://github.com/Bilup/desktop/releases/download/v1.5.3/Bilup-linux-armv7l-1.5.3.tar.gz
+        sha256: 3c7c2509f523dfb27d49d40892293c9d68c5dcc4472b425dd2df938792196d6d
+        dest-filename: Bilup-linux-armv7l-1.5.3.tar.gz
+        only-arches: [armv7l]
+
+      - type: file
+        path: org.bilup.Bilup.desktop
+      - type: file
+        path: org.bilup.Bilup.metainfo.xml
+      - type: file
+        path: org.bilup.Bilup.mime.xml
+      - type: dir
+        path: icons
+      - type: script
+        dest-filename: run.sh
+        commands:
+          - exec zypak-wrapper.sh /app/main/Bilup-desktop --no-sandbox "$@"

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Bilup
+Comment=TurboWarp mod with Chinese translations and live collaboration
+Exec=Bilup %U
+Icon=org.bilup.Bilup
+Terminal=false
+Type=Application
+StartupNotify=true
+StartupWMClass=bilup-desktop
+Categories=Education;Development;Graphics;
+Keywords=scratch;turbowarp;programming;visual;blocks;editor;collaboration;
+MimeType=application/x.scratch.sb3;application/x.scratch.sb2;application/x.scratch.sb;application/x-scratch-project;

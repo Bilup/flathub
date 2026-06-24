@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x.scratch.sb3">
+    <sub-class-of type="application/zip"/>
+    <magic priority="50">
+      <match type="string" offset="0" value="PK\x03\x04"/>
+      <match type="string" offset="30" value="project.json"/>
+    </magic>
+    <glob pattern="*.sb3"/>
+    <comment>Scratch 3 Project</comment>
+    <acronym>SB3</acronym>
+    <generic-icon name="org.bilup.Bilup"/>
+  </mime-type>
+  <mime-type type="application/x.scratch.sb2">
+    <sub-class-of type="application/zip"/>
+    <magic priority="50">
+      <match type="string" offset="0" value="PK\x03\x04"/>
+      <match type="string" offset="30" value="project.json"/>
+    </magic>
+    <glob pattern="*.sb2"/>
+    <comment>Scratch 2 Project</comment>
+    <acronym>SB2</acronym>
+    <generic-icon name="org.bilup.Bilup"/>
+  </mime-type>
+  <mime-type type="application/x.scratch.sb">
+    <magic priority="50">
+      <match type="string" offset="0" value="ScratchV"/>
+    </magic>
+    <glob pattern="*.sb"/>
+    <comment>Scratch 1 Project</comment>
+    <acronym>SB</acronym>
+    <generic-icon name="org.bilup.Bilup"/>
+  </mime-type>
+</mime-info>
